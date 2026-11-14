@@ -1,6 +1,6 @@
 <?php 
 require_once(dirname(__FILE__).'/templates/header.php'); 
-$farmData = getFarmData($_SESSION['hc_id']);
+$farmData = hcFarm\getFarmData($_SESSION['hc_id']);
 $latLng = explode(',',$farmData["location_ref"]);
 
 $nasaPowerData = hcNasaPower\getClimatology(trim($latLng[0]),trim($latLng[1]),'GWETROOT,TSURF,PRECTOTCORR');

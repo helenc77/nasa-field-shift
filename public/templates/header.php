@@ -4,11 +4,11 @@ require_once dirname(__DIR__).'/../src/php/functions.php';
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Basic Web App</title>
+		<title>Field Shift</title>
 		<link rel="stylesheet" type="text/css" href="/css/style.min.css">
 	</head>
 	<body>
-		<header><a href="/index.php">Basic web app</a>
+		<header><a href="/index.php">Field Shift</a>
 			<nav>
 				<ul>
 					<?php  if(isset($_SESSION['hc_loggedin']) && $_SESSION['hc_loggedin'] == true ) { ?>
