@@ -1,0 +1,1 @@
+var infoWindow,map;function getLocation(){var n=50.716667,t=-3.533333;return navigator.geolocation&&navigator.geolocation.getCurrentPosition(o=>{n=o.coords.latitude,t=o.coords.longitude},()=>{}),[n,t]}function handleLocationError(o,n,t){}export{getLocation,handleLocationError};

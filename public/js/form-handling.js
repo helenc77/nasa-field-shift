@@ -1,0 +1,1 @@
+function checkPasswordsMatch(){var t=document.getElementById("password"),e=document.getElementById("confirm_password");function o(){t.value!=e.value?e.setCustomValidity("Passwords Don't Match"):e.setCustomValidity("")}t.onchange=o,e.onkeyup=o}
