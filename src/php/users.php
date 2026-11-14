@@ -53,6 +53,7 @@
                     $_SESSION['hc_loggedin'] = true; 
                     $_SESSION['hc_id'] = $this->user['id']; 
                     $_SESSION['hc_email'] = $this->user['email']; 
+                    $_SESSION['hc_name'] = $this->user['name']; 
 
                 } else {
 
@@ -84,6 +85,7 @@
             $_SESSION['hc_loggedin'] = false; 
             unset($_SESSION['hc_id']);
             unset($_SESSION['hc_email']);
+            unset($_SESSION['hc_name']);
 
         }
     }
