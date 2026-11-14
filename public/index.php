@@ -1,6 +1,6 @@
 <?php require_once(dirname(__FILE__).'/templates/header.php'); ?>
 
-	<h1>Field Shift dashboard</h1>
+	<h1>Dashboard</h1>
 	<section class="grid">
 		<article class="grid-item">
 			<h2>Farm Data</h2>

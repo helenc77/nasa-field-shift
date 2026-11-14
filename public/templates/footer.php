@@ -1,5 +1,5 @@
 		</main>
-		<footer> footer stuff here
+		<footer> Website by NASA Crop Spacedusters <?php echo date("Y"); ?>
 		</footer>
 	</body>
 </html>
