@@ -1,4 +1,9 @@
-<?php require_once(dirname(__FILE__).'/templates/header.php'); ?>
+<?php require_once(dirname(__FILE__).'/templates/header.php'); 
+if($_SESSION['hc_loggedin'] != true ) {
+    // Redirect
+    header("Location: login.php"); 
+}
+?>
 
 	<h1>Dashboard</h1>
 	<section class="grid">

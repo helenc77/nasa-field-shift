@@ -11,7 +11,7 @@ $precipitationData = $nasaPowerData["properties"]["parameter"]["PRECTOTCORR"];
 $googleAgUnderstandingData = hcAgUnderstanding\getGoogleAgUnderstanding($farmData["s2cellid"], $env["GOOGLE_CLOUD_AG_UNDERSTAND_API_KEY"]);
 ?>
 
-	<h1><?php echo ($farmData["name"])?> data</h1>
+	<h1><?php echo ($farmData["name"])?> data (location <?php echo ($farmData["location_ref"])?>)</h1>
 
 	<?php foreach ($nasaPowerData["messages"] as $message) {
 		echo('<p>'.$message.'</p>');
