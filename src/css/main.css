@@ -33,7 +33,7 @@ main > h2, main > p {
     font-size: 8em;
 }
 
-header, footer {padding: 20px;}
+header, footer {padding: 20px; display: flex;}
 
 footer {
     color:#0d110f;
