@@ -14,11 +14,6 @@ $precipitationData = $nasaPowerData["properties"]["parameter"]["PRECTOTCORR"];
 $annualAvgRainfall = $precipitationData['ANN'];
 $soilPh = $farmData["soil_ph"];
 
-echo('<pre>');
-print_r($annualAvgRainfall);
-print_r($soilPh);
-echo('</pre>');
-
 ?>
 
 	<h1>Crops and rotation plan for <?php echo ($farmData["name"])?></h1>
