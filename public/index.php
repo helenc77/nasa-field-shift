@@ -12,7 +12,7 @@ if($_SESSION['hc_loggedin'] != true ) {
 			<ul>
 				<li><a href="/profile.php">Farm profile</a></li>
 				<li><a href="/farm.php">Farm data</a></li>
-				<li><a href="/suggestions.php">Crop rotation plan</a></li>
+				<li><a href="/suggestions.php">Crop plans</a></li>
 			</ul>
 		</article>
 	</section>
