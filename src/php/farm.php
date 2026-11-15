@@ -21,11 +21,27 @@
     function getCropData(){
 
         $conn = dbConnect();
-        $getCrops = dbSelect($conn, 'crops', array('id, name, soil_ph, soil_type, current_crop, location_ref', 's2cellid'), 'id = "'.$user['farm_id'].'"', 1, null);
-        $farm = $getFarm->fetch_assoc();
+        $getCrops = dbSelect($conn, 'crops', array('id, name, crop_family, max_soil_ph, min_soil_ph, ideal_avg_rainfall_min', 'ideal_avg_rainfall_max'), null, null , null);
+        $crops = $getCrops->fetch_all(MYSQLI_ASSOC);
         dbClose($conn);
 
-        return $getCrops;
+        return $crops;
+
+    }
+
+    function getCropFamilies(){
+
+        $conn = dbConnect();
+        $getCropFamilies = dbSelect($conn, 'crop_family', array('id, name'), null, null , null);
+        $cropFamilies = $getCropFamilies->fetch_all(MYSQLI_ASSOC);
+        dbClose($conn);
+
+        $cropFamiliesArr = [];
+        foreach($cropFamilies as $val){
+            $cropFamiliesArr[$val['id']] = $val['name'];
+        }
+
+        return $cropFamiliesArr;
 
     }
 
