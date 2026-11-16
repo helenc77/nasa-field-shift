@@ -6,7 +6,14 @@ if($_SESSION['hc_loggedin'] != true ) {
 }
 
 $farmData = hcFarm\getFarmData($_SESSION['hc_id']);
-$latLng = explode(',',$farmData["location_ref"]);
+
+if($farmData["location_ref"] !=''){
+  	$latLng = explode(',',$farmData["location_ref"]);
+} else {
+  	$latLng ='';
+}
+
+if ($latLng !='') {
 
 $nasaPowerData = hcNasaPower\getClimatology(trim($latLng[0]),trim($latLng[1]),'GWETROOT,TSURF,PRECTOTCORR');
 $rootZoneSoilData = $nasaPowerData["properties"]["parameter"]["GWETROOT"];
@@ -50,4 +57,8 @@ $googleAgUnderstandingData = hcAgUnderstanding\getGoogleAgUnderstanding($farmDat
 	?>
 	</ul>
 
-<?php require_once(dirname(__FILE__).'/templates/footer.php'); ?>
+<?php } else {
+	echo('<h1>'.$farmData["name"].' data</h1><p>Please go to <a href=/profile.php>your profile</a> and set your location</p>');
+}
+
+require_once(dirname(__FILE__).'/templates/footer.php'); ?>

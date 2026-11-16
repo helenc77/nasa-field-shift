@@ -102,6 +102,7 @@
         protected $existingUser;
 
         public $insertNewUser;
+        public $createLinkedFarm;
 
         function __construct($post) {
 
@@ -143,14 +144,20 @@
                 // Hash the password 
                 $password = password_hash($this->password, PASSWORD_DEFAULT); 
         
-
-
                 //sanitize
                 $values = ['name' => $this->name, 'email' => $this->email];
                 $sanitizedValues = sanitizeBeforeInsert($values);
+
+                //temporary farm name
+                $farmName = $sanitizedValues['name']."\'s Farm";
+
+                //create linked farm
+                $this->createLinkedFarm = dbInsert ($conn, 'farms', array('name'), 
+                array($farmName));
         
-                $this->insertNewUser = dbInsert ($conn, 'users', array('name', 'email', 'password'), 
-                array($sanitizedValues['name'], $sanitizedValues['email'], $password));
+                //insert new user
+                $this->insertNewUser = dbInsert ($conn, 'users', array('name', 'email', 'password', 'farm_id'), 
+                array($sanitizedValues['name'], $sanitizedValues['email'], $password, $this->createLinkedFarm));
 
             }
 

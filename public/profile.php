@@ -6,7 +6,12 @@ if($_SESSION['hc_loggedin'] != true ) {
 }
 
 $farmData = hcFarm\getFarmData($_SESSION['hc_id']);
-$latLng = explode(',',$farmData["location_ref"]);
+
+if($farmData["location_ref"] !='') {
+    $latLng = explode(',',$farmData["location_ref"]);
+} else {
+    $latLng ='';
+}
 
 use hcUsers\userRegister;
 use function hcFormHandling\renderErrors as renderErrors;
