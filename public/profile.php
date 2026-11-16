@@ -1,5 +1,9 @@
 <?php 
 require_once(dirname(__FILE__).'/templates/header.php'); 
+if($_SESSION['hc_loggedin'] != true ) {
+    // Redirect
+    header("Location: login.php"); 
+}
 
 $farmData = hcFarm\getFarmData($_SESSION['hc_id']);
 $latLng = explode(',',$farmData["location_ref"]);
