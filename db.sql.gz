@@ -1,0 +1,188 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: db:3306
+-- Generation Time: Nov 16, 2026 at 05:06 PM
+-- Server version: 10.11.14-MariaDB-ubu2204-log
+-- PHP Version: 8.0.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `crops`
+--
+
+CREATE TABLE `crops` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `crop_family` int(11) NOT NULL,
+  `max_soil_ph` decimal(10,2) DEFAULT NULL,
+  `min_soil_ph` decimal(10,2) DEFAULT NULL,
+  `ideal_avg_rainfall_min` decimal(10,2) DEFAULT NULL,
+  `ideal_avg_rainfall_max` decimal(10,2) DEFAULT NULL,
+  `ideal_avg_soil_wetness` decimal(10,2) DEFAULT NULL,
+  `ideal_avg_soil_temp` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `crops`
+--
+
+INSERT INTO `crops` (`id`, `name`, `crop_family`, `max_soil_ph`, `min_soil_ph`, `ideal_avg_rainfall_min`, `ideal_avg_rainfall_max`, `ideal_avg_soil_wetness`, `ideal_avg_soil_temp`) VALUES
+(1, 'potatoes', 3, '6.00', '5.00', '3.30', '5.80', NULL, NULL),
+(2, 'corn', 6, '6.50', '6.00', '5.00', '6.70', NULL, NULL),
+(3, 'cucumbers', 4, '6.50', '6.00', '3.50', '7.00', NULL, NULL),
+(4, 'tomatoes', 3, '6.50', '6.00', '2.50', '4.50', NULL, NULL),
+(5, 'alfalfa', 1, '7.00', '6.50', '1.64', '3.29', NULL, NULL),
+(6, 'lettuce', 2, '7.00', '6.50', '3.50', '6.00', NULL, NULL),
+(7, 'onions', 5, '7.00', '6.50', '3.00', '5.00', NULL, NULL),
+(8, 'vetch', 1, '8.00', '6.50', '1.37', '2.05', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `crop_family`
+--
+
+CREATE TABLE `crop_family` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `crop_family`
+--
+
+INSERT INTO `crop_family` (`id`, `name`) VALUES
+(1, 'legumes'),
+(2, 'brassicas'),
+(3, 'nightshades'),
+(4, 'cucurbits'),
+(5, 'alliums'),
+(6, 'grass-cereal');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `farms`
+--
+
+CREATE TABLE `farms` (
+  `id` int(6) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `location_ref` varchar(500) DEFAULT NULL,
+  `s2cellid` varchar(255) DEFAULT NULL,
+  `orig_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted` tinyint(1) DEFAULT NULL,
+  `soil_ph` varchar(255) DEFAULT NULL,
+  `soil_type` varchar(255) DEFAULT NULL,
+  `current_crop` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `farms`
+--
+
+INSERT INTO `farms` (`id`, `name`, `location_ref`, `s2cellid`, `orig_date`, `deleted`, `soil_ph`, `soil_type`, `current_crop`) VALUES
+(1, 'My Farm', '50.716667, -3.533333', '5219008024816914449', '2026-11-15 12:28:46', 0, 'neutral', 'clay', 'brassicas'),
+(10, 'Jeremy Clarkson\'s Farm', '50.716667, -3.533333', NULL, '2026-11-16 17:05:35', NULL, '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(6) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `farm_id` int(11) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `farm_id`, `deleted`) VALUES
+(4, 'Helen Connole', 'h.e.connole@googlemail.com', '$2y$10$IFLcVU3TeAmu.lJzajGQVusNUhDMSb1REnVmW1KSUEHxbK60hc.Wu', 0, 0),
+(5, 'Mr Farmer', 'test@test.com', '$2y$10$DJ1ZEcnVF7ng/0qv9Xn1tu7bSJwmFsac2R0CYhXmm8bW1tLW0eW1a', 1, 0),
+(6, 'Jeremy Clarkson', 'test22@test.com', '$2y$10$VKfajuPiez/KaDD4TUXwQu0OdxRkVMeGGGwx.K9lVhzxpzkan1qAO', 10, 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `crops`
+--
+ALTER TABLE `crops`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `crop_family`
+--
+ALTER TABLE `crop_family`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `farms`
+--
+ALTER TABLE `farms`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `crops`
+--
+ALTER TABLE `crops`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `crop_family`
+--
+ALTER TABLE `crop_family`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `farms`
+--
+ALTER TABLE `farms`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
