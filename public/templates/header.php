@@ -14,6 +14,7 @@ require_once dirname(__DIR__).'/../src/php/functions.php';
 		<header><div class="main-title"><a href="/index.php">Field Shift</a></div>
 			<nav>
 				<ul>
+					<li><a href="/index.php">Home</a></li>
 					<?php  if(isset($_SESSION['hc_loggedin']) && $_SESSION['hc_loggedin'] == true ) { ?>
 						<li>Welcome <?php echo($_SESSION['hc_name']) ?></li>
 						<li><a href="/logout.php">Log out</a></li>
